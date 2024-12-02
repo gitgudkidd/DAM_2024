@@ -51,6 +51,9 @@ class _HomePageState extends State<HomePage> {
               child: StreamBuilder(
                 stream: FsService().recetas(),
                 builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) { 
+                  if (!snapshot.hasData || snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  }
                   return ListView.separated(
                     separatorBuilder: (context, index) => Divider(),
                     itemCount: snapshot.data!.docs.length,
