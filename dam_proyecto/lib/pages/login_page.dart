@@ -15,15 +15,37 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:Container(child: ElevatedButton(onPressed: () async {
-        await signInWithGoogle();
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
-      }, 
-      child: Text('Iniciar Sesion'),),),
-      
+      body:Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets\images\Fondo_Login.jpg'),
+          ),
+        ),
+        child: Form(
+          child: Container(
+            child: ListView(
+              children: [
+                Container(
+                  child:TextFormField() ,
+                ),
+                Container(
+                  child: ElevatedButton(onPressed: () async {
+                    await signInWithGoogle();
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
+                  },
+                    child: Text('Iniciar Sesion'),
+                  ),
+                ), 
+              ],
+            ),
+          )
+        ),
+      ) 
     );
   }
 }
+
+        
 
 Future<UserCredential> signInWithGoogle() async {
   // Trigger the authentication flow
