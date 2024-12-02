@@ -12,7 +12,7 @@ class FsService {
   }
 
   //agregar una receta
-  Future<void> agregarReceta(String nombre, int categoria, String instrucciones, String autor) {
+  Future<void> agregarReceta(String nombre, String categoria, String instrucciones, String autor) {
     return FirebaseFirestore.instance.collection('Recetas').doc().set({
       'nombre': nombre,
       'categoria': categoria,
