@@ -2,6 +2,7 @@ import 'package:dam_proyecto/pages/home_page.dart';
 import 'package:flutter/material.dart'; 
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:dam_proyecto/constants.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -12,38 +13,49 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  TextEditingController correoCtrl = TextEditingController();
+  TextEditingController claveCtrl = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Inicie sesion',style: TextStyle(color: Color(kDoradoColor) ),),
+        centerTitle: true,
+        backgroundColor: Color(kOscuroColor),
+      ),
+      
       body:Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets\images\Fondo_Login.jpg'),
-          ),
-        ),
-        child: Form(
-          child: Container(
-            child: ListView(
-              children: [
-                Container(
-                  child:TextFormField() ,
-                ),
-                Container(
-                  child: ElevatedButton(onPressed: () async {
-                    await signInWithGoogle();
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
-                  },
-                    child: Text('Iniciar Sesion'),
+        child: Container(
+          child: Form(
+            child: Container(
+              child: ListView(
+                padding: EdgeInsets.all(10),
+                children: [
+                  Container(
+                    child:TextFormField(
+                      controller: correoCtrl,
+                      decoration: InputDecoration(labelText: 'Email'),
+                      keyboardType: TextInputType.emailAddress,
+                    ), 
                   ),
-                ), 
-              ],
-            ),
-          )
+                  Container(
+                    child: ElevatedButton(onPressed: () async {
+                      await signInWithGoogle();
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
+                    },
+                      child: Text('Iniciar Sesion'),
+                    ),
+                  ), 
+                ],
+              ),
+            )
+          ),
         ),
       ) 
     );
   }
 }
+
 
         
 
